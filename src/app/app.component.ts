@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewChecked, Component, OnChanges, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { Pokemon } from './types';
 
 @Component({
@@ -11,9 +11,10 @@ export class AppComponent implements OnInit, AfterViewChecked {
   baseUrl = `http://localhost:9000/pokemons?_limit=100`;
   pokemons: Pokemon[] = [];
   filteredPokemons: Pokemon[] = [];
-  favorites: Pokemon[] = [];
-  filteredFavorites: Pokemon[] = [];
-  showFavorites: boolean = false;
+  cart: Pokemon[] = [];
+  filteredCart: Pokemon[] = [];
+  showCart: boolean = false;
+  selectedPokemon: Pokemon | undefined;
 
   constructor(private http: HttpClient) {}
 
@@ -26,24 +27,23 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    // console.trace();
-    console.log('AppComponent');
+    // console.log('AppComponent');
   }
 
   addFavorite(pokemon: Pokemon) {
     const index = this.pokemons.indexOf(pokemon);
-    this.favorites.push(pokemon);
-    this.filteredFavorites = this.favorites;
+    this.cart.push(pokemon);
+    this.filteredCart = this.cart;
     this.pokemons.splice(index, 1);
     this.filteredPokemons = this.pokemons;
   }
 
   removeFavorite(pokemon: Pokemon) {
-    const index = this.favorites.indexOf(pokemon);
+    const index = this.cart.indexOf(pokemon);
     this.pokemons.push(pokemon);
     this.filteredPokemons = this.pokemons;
-    this.favorites.splice(index, 1);
-    this.filteredFavorites = this.favorites;
+    this.cart.splice(index, 1);
+    this.filteredCart = this.cart;
   }
 
   filterPokemons(name: string) {
@@ -54,15 +54,19 @@ export class AppComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  filterFavorites(name: string) {
+  filterCart(name: string) {
     if (name) {
-      this.filteredFavorites = this.favorites.filter(pokemon => pokemon.name.includes(name));
+      this.filteredCart = this.cart.filter(pokemon => pokemon.name.includes(name));
     } else {
-      this.filteredFavorites = this.favorites;
+      this.filteredCart = this.cart;
     }
   }
 
-  toggleFavorites() {
-    this.showFavorites = !this.showFavorites;
+  toggleCart() {
+    this.showCart = !this.showCart;
+  }
+
+  selectPokemon(pokemon: Pokemon) {
+    this.selectedPokemon = pokemon;
   }
 }

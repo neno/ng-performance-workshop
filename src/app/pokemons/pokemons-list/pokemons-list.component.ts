@@ -21,10 +21,8 @@ export class PokemonsListComponent implements OnInit, AfterViewChecked {
   @Input() pokemons: Pokemon[] = [];
   @Input() btnLabel!: string;
   @Output() handleSearch = new EventEmitter<string>();
+  @Output() handleCartAction = new EventEmitter<Pokemon>();
   @Output() handleSelect = new EventEmitter<Pokemon>();
-  // @Output() addFavorite = new EventEmitter<string>();
-  // @Output() removeFavorite = new EventEmitter<Pokemon>();
-
 
   imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/`;
   searchName: string = '';
@@ -35,9 +33,7 @@ export class PokemonsListComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    console.log('PokemonsListComponent');
-
-    // console.trace();
+    // console.log('PokemonsListComponent');
   }
 
   pokemonImageUrl(pokemon: Pokemon) {
@@ -46,11 +42,9 @@ export class PokemonsListComponent implements OnInit, AfterViewChecked {
   }
 
   calculateScore(pokemon: Pokemon) {
-    // const n = randomIntFromInterval(1, 36);
-    // const n = randomIntFromInterval(1, 26);
-    // return fibonacci(n);
+    console.log('calculateScore');
+
     const score = fibonacci(pokemon.name.length * 3);
-    // console.log('calculateScore', score);
     return score;
   }
 

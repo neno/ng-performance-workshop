@@ -4,44 +4,49 @@
     <div class="text-right">
       <button
         class="text-xl font-bold bg-blue-500 text-white rounded p-4 mb-4 w-52"
-        [ngClass]="{'bg-gray-300': favorites.length === 0}"
-        (click)="toggleFavorites()"
-        [disabled]="favorites.length === 0"
+        [ngClass]="{'bg-gray-300': cart.length === 0}"
+        (click)="toggleCart()"
+        [disabled]="cart.length === 0"
       >
-        Cart  ({{ favorites.length }}) {{ showFavorites ? "&#x25B2;" : "&#x25BC;" }}
+        Cart  ({{ cart.length }}) {{ showCart ? "&#x25B2;" : "&#x25BC;" }}
       </button>
       <div class="relative">
         <div class="absolute top-0 left-0 w-full bg-white shadow-xl">
-          <ng-container *ngIf="showFavorites">
+          <div [ngClass]="{'hidden': !showCart, 'inherit': 'showCart'}">
             <app-pokemons-list
-              *ngIf="favorites.length > 0"
-              [pokemons]="filteredFavorites"
-              (handleSelect)="removeFavorite($event)"
-              (handleSearch)="filterFavorites($event)"
+              *ngIf="cart.length > 0"
+              [pokemons]="filteredCart"
+              (handleCartAction)="removeFavorite($event)"
+              (handleSearch)="filterCart($event)"
               btnLabel="🗑️"
             >
             </app-pokemons-list>
-          </ng-container>
+          </div>
         </div>
       </div>
     </div>
   </header>
 
-  <div class="">
+  <div class="grid grid-cols-2 gap-8">
     <section>
       <ng-container *ngIf="pokemons.length > 0">
         <app-pokemons-list
           [pokemons]="filteredPokemons"
-          (handleSelect)="addFavorite($event)"
+          (handleCartAction)="addFavorite($event)"
           (handleSearch)="filterPokemons($event)"
+          (handleSelect)="selectPokemon($event)"
           btnLabel="Add to Cart"
         >
         </app-pokemons-list>
       </ng-container>
     </section>
-    <!-- <section>
-      <h2>Favorite Pokemons</h2>
-      <app-pokemons-list [pokemons]="favoritePokemons" (removeFavorite)="removeFavorite($event)"></app-pokemons-list>
-    </section> -->
+    <section>
+      <ng-container *ngIf="selectedPokemon; else noSelected">
+        <app-pokemon-detail [selectedPokemon]="selectedPokemon"></app-pokemon-detail>
+      </ng-container>
+      <ng-template #noSelected>
+        <p>Select a Pokemon to display its details.</p>
+      </ng-template>
+    </section>
   </div>
 </div>
