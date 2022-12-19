@@ -1,5 +1,7 @@
 # Performance Optimization
 
+This example app suffers from most performance issues and anti-patterns an Angular app can have.
+
 ## Performance Problems
 
 - Memory: leak or bloat

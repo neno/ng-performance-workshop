@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-performance": {
+    "ng-performance-workshop": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng-performance",
+            "outputPath": "dist/ng-performance-workshop",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ng-performance:build:production"
+              "browserTarget": "ng-performance-workshop:build:production"
             },
             "development": {
-              "browserTarget": "ng-performance:build:development"
+              "browserTarget": "ng-performance-workshop:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-performance:build"
+            "browserTarget": "ng-performance-workshop:build"
           }
         },
         "test": {
