@@ -1,4 +1,4 @@
-<ng-container *ngIf="pokemon">
+<ng-container *ngIf="pokemon"; else loading>
   <div class="bg-white relative z-10">
     <a [routerLink]="['..']" class="absolute right-0 top-0 text-5xl z-20 text-black hover:no-underline hover:text-primary">🅧</a>
     <img

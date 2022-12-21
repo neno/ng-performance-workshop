@@ -12,7 +12,7 @@ export class PokemonsService {
   constructor(private http: HttpClient) { }
 
   loadAllPokemons(): Observable<Pokemon[]> {
-    return this.http.get<{results: Pokemon[]}>(`${this.baseApi}?limit=100`).pipe(
+    return this.http.get<{results: Pokemon[]}>(`${this.baseApi}?limit=300`).pipe(
       map((data) => data.results)
     );
   }

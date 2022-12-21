@@ -35,24 +35,16 @@ export class PokemonsListComponent implements OnInit, AfterViewChecked {
     // console.log('PokemonsListComponent');
   }
 
-  pokemonId(pokemon: Pokemon) {
-    const id = pokemon.url.split('/')[pokemon.url.split('/').length - 2];
-    return id;
-  }
-
   pokemonImageUrl(pokemon: Pokemon) {
-    const id = this.pokemonId(pokemon);
-    return `${this.imageUrl}${id}.png`;
+    return `${this.imageUrl}${pokemon.id}.png`;
   }
 
   calculateScore(pokemon: Pokemon) {
-    // console.log('calculateScore');
-
     const score = fibonacci(pokemon.name.length * 3);
     return score;
   }
 
-  onKeydown(event: KeyboardEvent) {
+  onKeydown() {
     this.handleSearch.emit(this.searchName);
   }
 }
