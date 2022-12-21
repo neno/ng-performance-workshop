@@ -20,16 +20,14 @@
   </li>
 </ul>
 
-<p>
-  Ideally a change detection only gets executed if really something changed.
-</p>
+<h2>Investigate change detections cycles</h2>
 
-<h2>Check the change detections for a component</h2>
+<p>There are several ways we can investigate the change detection.</p>
+<p>Use the Profile from the Angular DevTools</p>
 
 <p>
-  Add a <code>console.log('PokemonsListComponent')</code> in
-  <strong>ngAfterViewChecked</strong> and check how many times it runs for this
-  very component.
+  Add a <code>console.log('PokemonsListComponent')</code> inside the
+  <strong>ngAfterViewChecked</strong> hook of a component and watch how many times it runs.
 </p>
 
 <p>To measure how</p>

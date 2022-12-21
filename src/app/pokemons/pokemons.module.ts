@@ -5,12 +5,14 @@ import { PokemonsListComponent } from './pokemons-list/pokemons-list.component';
 import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component';
 import { PokemonsComponent } from './pokemons.component';
 import { PokemonRoutingModule } from './pokemon-routing.module';
+import { ScrollDirective } from './scroll.directive';
 
 @NgModule({
   declarations: [
     PokemonsListComponent,
     PokemonDetailComponent,
-    PokemonsComponent
+    PokemonsComponent,
+    ScrollDirective
   ],
   imports: [
     CommonModule,

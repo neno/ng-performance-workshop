@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewChecked, Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Pokemon } from '@app/pokemons/types';
 
 const randomIntFromInterval = (min: number, max: number): number => { // min and max included
