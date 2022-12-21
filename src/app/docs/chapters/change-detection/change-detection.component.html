@@ -1,7 +1,5 @@
 <h1>Change Detection and Re-rendering</h1>
 
-
-
 <p>
   Change detection makes data binding in Angular just work.<br />
   By traversing the whole component tree top to bottom of your app it detects
@@ -16,7 +14,10 @@
   <li>"on"-Events, eg: click, scroll, keydown, etc.</li>
   <li>Ajax events, eg: http</li>
   <li>setTimeout, setInterval, requestAnimationFrame</li>
-  <li>Angular wraps callbacks that trigger redundant change detection cycles (often 3p libs)</li>
+  <li>
+    Angular wraps callbacks that trigger redundant change detection cycles
+    (often 3p libs)
+  </li>
 </ul>
 
 <p>
@@ -44,6 +45,6 @@
   the whole cycle should not take longer than 16ms!
 </p>
 <p>
-  If the whole change detection cycle takes longer than 60ms
-  the whole cycle should not take longer than 16ms!
+  If the whole change detection cycle takes longer than 60ms the whole cycle
+  should not take longer than 16ms!
 </p>

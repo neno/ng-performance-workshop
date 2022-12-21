@@ -1,14 +1,21 @@
 <ng-container *ngIf="pokemon">
-  <div class="my-8">
-    <img [src]="imgSrc" [alt]="pokemon.name" class="w-full">
+  <div class="bg-white relative z-10">
+    <a [routerLink]="['..']" class="absolute right-0 top-0 text-5xl z-20 text-black hover:no-underline hover:text-primary">🅧</a>
+    <img
+      [src]="imgSrc"
+      [alt]="pokemon.name"
+      width="475"
+      height="475"
+      class="aspect-square object-contain mx-auto relative z-10"
+    />
+    <h2 class="text-3xl my-8">{{ pokemon.name }}</h2>
+    <dl class="">
+      <dt class="block mt-4 font-bold">Abilities:</dt>
+      <dd class="mb-4">{{ abilities }}</dd>
+      <dt class="block mt-4 font-bold">Games:</dt>
+      <dd class="mb-4">{{ games }}</dd>
+    </dl>
   </div>
-  <h2 class="text-3xl my-8">{{pokemon.name}}</h2>
-  <dl class="">
-    <dt class="block mt-4 font-bold">Abilities:</dt>
-    <dd class="mb-4">{{ abilities }}</dd>
-    <dt class="block mt-4 font-bold">Games:</dt>
-    <dd class="mb-4">{{games}}</dd>
-  </dl>
 </ng-container>
 <ng-template #loading>
   <h2>Loading...</h2>
