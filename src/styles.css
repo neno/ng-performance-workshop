@@ -2,3 +2,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1 {
+  @apply text-5xl font-bold my-8;
+}
+
+h2 {
+  @apply text-3xl font-bold my-8;
+}
+
+h3 {
+  @apply text-xl font-bold my-4;
+}
+
+p,
+ul {
+  @apply my-4;
+}
+
+.activenav {
+  @apply bg-black text-white;
+}
+
+main a {
+  @apply text-primary hover:underline;
+}
+
+/* code {
+  @apply bg-slate-800 text-white;
+} */

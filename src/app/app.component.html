@@ -1,52 +1,15 @@
-<div class="container mx-auto">
-  <header class="grid grid-cols-2 py-8 gap-8 justify-between">
-    <h1 class="text-5xl">Pokemons</h1>
-    <div class="text-right">
-      <button
-        class="text-xl font-bold bg-blue-500 text-white rounded p-4 mb-4 w-52"
-        [ngClass]="{'bg-gray-300': cart.length === 0}"
-        (click)="toggleCart()"
-        [disabled]="cart.length === 0"
-      >
-        Cart  ({{ cart.length }}) {{ showCart ? "&#x25B2;" : "&#x25BC;" }}
-      </button>
-      <div class="relative">
-        <div class="absolute top-0 left-0 w-full bg-white shadow-xl">
-          <div [ngClass]="{'hidden': !showCart, 'inherit': 'showCart'}">
-            <app-pokemons-list
-              *ngIf="cart.length > 0"
-              [pokemons]="filteredCart"
-              (handleCartAction)="removeFavorite($event)"
-              (handleSearch)="filterCart($event)"
-              btnLabel="🗑️"
-            >
-            </app-pokemons-list>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="grid grid-cols-2 gap-8">
-    <section>
-      <ng-container *ngIf="pokemons.length > 0">
-        <app-pokemons-list
-          [pokemons]="filteredPokemons"
-          (handleCartAction)="addFavorite($event)"
-          (handleSearch)="filterPokemons($event)"
-          (handleSelect)="selectPokemon($event)"
-          btnLabel="Add to Cart"
-        >
-        </app-pokemons-list>
-      </ng-container>
-    </section>
-    <section>
-      <ng-container *ngIf="selectedPokemon; else noSelected">
-        <app-pokemon-detail [selectedPokemon]="selectedPokemon"></app-pokemon-detail>
-      </ng-container>
-      <ng-template #noSelected>
-        <p>Select a Pokemon to display its details.</p>
-      </ng-template>
-    </section>
-  </div>
-</div>
+<header class="p-4 bg-blue-600">
+  <nav>
+    <ul class="flex items-center justify-between gap-2 m-0">
+      <li>
+        <a routerLink="/docs" routerLinkActive="activenav" class="p-2 bg-white rounded hover:bg-slate-300 hover:text-black">Docs</a>
+      </li>
+      <li>
+        <a routerLink="/pokemons" routerLinkActive="activenav" class="p-2 bg-white rounded hover:bg-slate-300 hover:text-black">Pokemon App</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<main class="container mx-auto my-16">
+  <router-outlet></router-outlet>
+</main>

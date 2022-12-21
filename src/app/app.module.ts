@@ -1,24 +1,23 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PokemonsListComponent } from './pokemons/pokemons-list/pokemons-list.component';
-import { FormsModule } from '@angular/forms';
-import { PokemonDetailComponent } from './pokemons/pokemon-detail/pokemon-detail.component';
+import { DocsComponent } from './docs/docs.component';
+import { ChangeDetectionComponent } from './docs/chapters/change-detection/change-detection.component';
+import { MemoryLeaksComponent } from './docs/chapters/memory-leaks/memory-leaks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PokemonsListComponent,
-    PokemonDetailComponent
+    DocsComponent,
+    ChangeDetectionComponent,
+    MemoryLeaksComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

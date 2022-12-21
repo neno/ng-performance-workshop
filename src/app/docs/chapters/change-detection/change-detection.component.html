@@ -1,0 +1,49 @@
+<h1>Change Detection and Rendering</h1>
+
+
+
+<p>
+  Change detection makes data binding in Angular just work.<br />
+  By traversing the whole component tree top to bottom of your app it detects
+  changes, triggers a re-render if needed and marks unused elements for garbage
+  collection.<br />
+  Ideally a change detection only gets executed if really something changed.
+</p>
+
+<h2>What triggers a change-detection cycle?</h2>
+
+<ul class="list-disc m-4">
+  <li>"on"-Events, eg: click, scroll, keydown, etc.</li>
+  <li>Ajax events, eg: http</li>
+  <li>setTimeout, setInterval, requestAnimationFrame</li>
+  <li>Angular wraps callbacks that trigger redundant change detection cycles (often 3p libs)</li>
+</ul>
+
+<p>
+  Ideally a change detection only gets executed if really something changed.
+</p>
+
+<h2>Check the change detections for a component</h2>
+
+<p>
+  Add a <code>console.log('PokemonsListComponent')</code> in
+  <strong>ngAfterViewChecked</strong> and check how many times it runs for this
+  very component.
+</p>
+
+<p>To measure how</p>
+<pre class="bg-slate-800 text-white">
+  <code>
+    platformBrowserDynamic().bootstrapModule(AppModule)
+      .then(module => enableDebugTools(module.injector.get(ApplicationRef).components[0]));
+  </code>
+</pre>
+
+<p>
+  As a rule of thunmb: A change detection should not last longer than 0.016ms,
+  the whole cycle should not take longer than 16ms!
+</p>
+<p>
+  If the whole change detection cycle takes longer than 60ms
+  the whole cycle should not take longer than 16ms!
+</p>

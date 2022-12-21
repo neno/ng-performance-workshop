@@ -1,0 +1,41 @@
+<h1>Angular Performance Optimization</h1>
+
+<p>
+  This example app suffers from most performance issues and anti-patterns an
+  Angular app can have.
+</p>
+
+<div class="grid grid-cols-2 gap-8">
+  <section>
+    <h2>Most common Angular Performance Problems</h2>
+    <nav>
+      <ul class="list-disc m-4 flex flex-col gap-4">
+        <li>
+          <a routerLink="chapters/change-detection">
+            Too many change-detection cycles and re-renderings
+          </a>
+        </li>
+        <li>
+          <a routerLink="chapters/memory-leaks"> Memory: leak or bloat </a>
+        </li>
+        <li>Heavy computations</li>
+        <li>Expensive Event Listeners</li>
+      </ul>
+    </nav>
+    <p>Most of the time it is a combination of all of them.</p>
+  </section>
+  <section>
+    <h2>Goals of this Workshop</h2>
+    <ul class="list-disc m-4 flex flex-col gap-4">
+      <li>Problem - What is the cause</li>
+      <li>Identification - How to identify with (Angular) DevTools</li>
+      <li>Resolution - How to resolve it in the Demo-App</li>
+      <li>Adaption - How can we apply this to the ALI app</li>
+    </ul>
+  </section>
+</div>
+
+<!-- <p>
+  For each problem we first need to understand it, then we will take a look on
+  how to identify it and as a last point we will try to solve it
+</p> -->

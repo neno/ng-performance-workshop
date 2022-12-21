@@ -1,5 +1,5 @@
 import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Pokemon } from '@app/types';
+import { Pokemon } from '@app/pokemons/types';
 
 const randomIntFromInterval = (min: number, max: number): number => { // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -15,7 +15,6 @@ const fibonacci = (num: number): number => {
 @Component({
   selector: 'app-pokemons-list',
   templateUrl: './pokemons-list.component.html',
-  styleUrls: ['./pokemons-list.component.css']
 })
 export class PokemonsListComponent implements OnInit, AfterViewChecked {
   @Input() pokemons: Pokemon[] = [];
@@ -42,7 +41,7 @@ export class PokemonsListComponent implements OnInit, AfterViewChecked {
   }
 
   calculateScore(pokemon: Pokemon) {
-    console.log('calculateScore');
+    // console.log('calculateScore');
 
     const score = fibonacci(pokemon.name.length * 3);
     return score;
