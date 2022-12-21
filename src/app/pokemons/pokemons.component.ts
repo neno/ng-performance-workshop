@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PokemonsService } from './pokemons.service';
 import { Pokemon } from './types';
 
@@ -7,10 +8,8 @@ import { Pokemon } from './types';
 @Component({
   selector: 'app-pokemons',
   templateUrl: './pokemons.component.html',
-  styleUrls: ['./pokemons.component.css'],
 })
 export class PokemonsComponent implements OnInit, AfterViewChecked {
-  baseUrl = `http://localhost:9000/pokemons?_limit=100`;
   pokemons: Pokemon[] = [];
   filteredPokemons: Pokemon[] = [];
   cart: Pokemon[] = [];
@@ -18,13 +17,16 @@ export class PokemonsComponent implements OnInit, AfterViewChecked {
   showCart: boolean = false;
   selectedPokemon: Pokemon | undefined;
 
-  constructor(private pokemonService: PokemonsService) {}
+  constructor(private pokemonService: PokemonsService, private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.pokemonService.loadAllPokemons().subscribe(data => {
-      this.pokemons = data.sort((a, b) => (a.name < b.name ? -1 : 1));
-      this.pokemons = data;
-      this.filteredPokemons = data;
+      this.pokemons = data.map((poke) => {
+        const id = poke.url.split('/')[poke.url.split('/').length - 2];
+        return {...poke, id }
+      }).sort((a, b) => (a.name < b.name ? -1 : 1));
+      // this.pokemons = data;
+      this.filteredPokemons = this.pokemons;
     });
   }
 
@@ -69,6 +71,10 @@ export class PokemonsComponent implements OnInit, AfterViewChecked {
   }
 
   selectPokemon(pokemon: Pokemon) {
-    this.selectedPokemon = pokemon;
+    console.log(pokemon);
+
+    // this.selectedPokemon = pokemon;
+    this.router.navigate([pokemon.id], { relativeTo: this.activatedRoute });
+    // this.router.navigate(['..'], { relativeTo: this.activatedRoute });
   }
 }

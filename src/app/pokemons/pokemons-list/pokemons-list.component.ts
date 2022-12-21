@@ -35,8 +35,13 @@ export class PokemonsListComponent implements OnInit, AfterViewChecked {
     // console.log('PokemonsListComponent');
   }
 
-  pokemonImageUrl(pokemon: Pokemon) {
+  pokemonId(pokemon: Pokemon) {
     const id = pokemon.url.split('/')[pokemon.url.split('/').length - 2];
+    return id;
+  }
+
+  pokemonImageUrl(pokemon: Pokemon) {
+    const id = this.pokemonId(pokemon);
     return `${this.imageUrl}${id}.png`;
   }
 

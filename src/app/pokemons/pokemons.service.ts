@@ -1,22 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable } from 'rxjs';
-import { Pokemon } from './types';
+import { map, Observable, tap } from 'rxjs';
+import { Pokemon, PokemonDetail } from './types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PokemonsService {
-  baseApi = `http://localhost:9000/pokemons`;
+  baseApi = `https://pokeapi.co/api/v2/pokemon`;
 
   constructor(private http: HttpClient) { }
 
   loadAllPokemons(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(`${this.baseApi}?_limit=100`);
+    return this.http.get<{results: Pokemon[]}>(`${this.baseApi}?_limit=100`).pipe(
+      map((data) => data.results)
+    );
   }
 
-  loadPokemonByName(name: string): Observable<Pokemon> {
-    return this.http.get<Pokemon>(`${this.baseApi}?name=${name}`)
+  loadPokemonById(id: string): Observable<PokemonDetail> {
+    return this.http.get<PokemonDetail>(`${this.baseApi}/${id}`)
   }
 
 }

@@ -1,4 +1,15 @@
-<div class="m-8">
-  <img [src]="imgSrc" alt="pokemon.name" class="w-full">
-</div>
-<h2 class="text-3xl m-8">{{selectedPokemon.name}}</h2>
+<ng-container *ngIf="pokemon">
+  <div class="my-8">
+    <img [src]="imgSrc" [alt]="pokemon.name" class="w-full">
+  </div>
+  <h2 class="text-3xl my-8">{{pokemon.name}}</h2>
+  <dl class="">
+    <dt class="block mt-4 font-bold">Abilities:</dt>
+    <dd class="mb-4">{{ abilities }}</dd>
+    <dt class="block mt-4 font-bold">Games:</dt>
+    <dd class="mb-4">{{games}}</dd>
+  </dl>
+</ng-container>
+<ng-template #loading>
+  <h2>Loading...</h2>
+</ng-template>

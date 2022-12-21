@@ -41,12 +41,13 @@
       </ng-container>
     </section>
     <section>
-      <ng-container *ngIf="selectedPokemon; else noSelected">
+      <router-outlet></router-outlet>
+      <!-- <ng-container *ngIf="selectedPokemon; else noSelected">
         <app-pokemon-detail [selectedPokemon]="selectedPokemon"></app-pokemon-detail>
       </ng-container>
       <ng-template #noSelected>
         <p>Select a Pokemon to display its details.</p>
-      </ng-template>
+      </ng-template> -->
     </section>
   </div>
 </div>

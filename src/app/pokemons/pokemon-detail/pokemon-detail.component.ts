@@ -1,17 +1,26 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Pokemon } from '@app/pokemons/types';
+import { ActivatedRoute } from '@angular/router';
+import { Pokemon, PokemonDetail } from '@app/pokemons/types';
+import { Observable } from 'rxjs';
+import { PokemonsService } from '../pokemons.service';
 
 @Component({
   selector: 'app-pokemon-detail',
   templateUrl: './pokemon-detail.component.html',
-  styleUrls: ['./pokemon-detail.component.css']
 })
 export class PokemonDetailComponent implements OnInit, OnChanges {
-  @Input() selectedPokemon!: Pokemon;
+  // @Input() selectedPokemon!: Pokemon;
+  pokemon!: PokemonDetail;
 
   imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/`;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private pokemonService: PokemonsService) {
+    this.route.params.subscribe((params) => {
+      this.pokemonService.loadPokemonById(params['id']).subscribe((data) => {
+        this.pokemon = {...data, id: params['id']};
+      })
+    })
+  }
 
   ngOnInit(): void {
   }
@@ -21,8 +30,15 @@ export class PokemonDetailComponent implements OnInit, OnChanges {
   }
 
   get imgSrc() {
-    const id = this.selectedPokemon.url.split('/')[this.selectedPokemon.url.split('/').length - 2];
-    return `${this.imageUrl}${id}.png`;
+    return `${this.imageUrl}${this.pokemon.id}.png`;
+  }
+
+  get abilities(): string {
+    return this.pokemon.abilities.map((item) => item.ability.name).join(', ');
+  }
+
+  get games(): string {
+    return this.pokemon.game_indices.map(({game_index}) => game_index).join(', ');
   }
 
 }
