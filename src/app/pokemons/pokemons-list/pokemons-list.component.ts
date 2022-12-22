@@ -32,7 +32,7 @@ export class PokemonsListComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    // console.log('PokemonsListComponent');
+    console.log('PokemonsListComponent');
   }
 
   pokemonImageUrl(pokemon: Pokemon) {

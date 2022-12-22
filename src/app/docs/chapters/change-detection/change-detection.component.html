@@ -1,14 +1,20 @@
 <h1>Change Detection and Re-rendering</h1>
 
 <p>
-  Change detection makes data binding in Angular just work.<br />
+  Change detection makes data binding in Angular just work. That's great!<br />
   By traversing the whole component tree top to bottom of your app it detects
   changes, triggers a re-render if needed and marks unused elements for garbage
   collection.<br />
+  Usually change detection takes only a fraction of milliseconds per component
+  instance. But if you have thousands of instances then there will not be enough
+  time for re-renderings at 60 fps.<br />
+  If you then have like expensive calculatons - maybe even in a loop - Angular
+  will start to skip frames. The application will then start to feel laggy.
   Ideally a change detection only gets executed if really something changed.
+  That is where we sometimes need to help Angular.
 </p>
 
-<h2>What triggers a change-detection cycle?</h2>
+<h2>What triggers a change-detection cycle and/or a re-render?</h2>
 
 <ul class="list-disc m-4">
   <li>"on"-Events, eg: click, scroll, keydown, etc.</li>
@@ -18,19 +24,35 @@
     Angular wraps callbacks that trigger redundant change detection cycles
     (often 3p libs)
   </li>
+  <li>
+    Getters and function calls inside a template will always trigger a
+    re-render.
+  </li>
 </ul>
 
-<h2>Investigate change detections cycles</h2>
+<h2>Investigate change detections</h2>
 
 <p>There are several ways we can investigate the change detection.</p>
-<p>Use the Profile from the Angular DevTools</p>
 
-<p>
-  Add a <code>console.log('PokemonsListComponent')</code> inside the
-  <strong>ngAfterViewChecked</strong> hook of a component and watch how many times it runs.
-</p>
+<ul class="list-disc m-4">
+  <li>
+    Use the Profile from <strong>Angular DevTools</strong> - install Angular
+    DevTools if you don't have it already.
+  </li>
+  <li>
+    Add a <code>console.log('PokemonsListComponent')</code> inside the
+    <strong>ngAfterViewChecked</strong> hook of a component and watch how many
+    times it runs.
+  </li>
+  <li>
+    Open the Chrome Source tab. Select the vendor.js file and search for
+    <strong>"tick"</strong> function. Then add a logPoint like "ticked".
+  </li>
+  <li>
+    Add <strong>enableDebugTools</strong> in main.ts when bootstrapping the App.
+  </li>
+</ul>
 
-<p>To measure how</p>
 <pre class="bg-slate-800 text-white">
   <code>
     platformBrowserDynamic().bootstrapModule(AppModule)
@@ -38,11 +60,30 @@
   </code>
 </pre>
 
+<h2>Resolution</h2>
+
 <p>
-  As a rule of thunmb: A change detection should not last longer than 0.016ms,
-  the whole cycle should not take longer than 16ms!
+  Reduce the amount of change detections and re-renderings. Ideally get rid of
+  all unneeded detections and renderings.
 </p>
-<p>
-  If the whole change detection cycle takes longer than 60ms the whole cycle
-  should not take longer than 16ms!
-</p>
+
+<ul class="list-disc m-4">
+  <li>
+    Use the <strong>ChangeDetectionStrategy: OnPush</strong> and adapt the data
+    accordingly. You can even detach components entirely from change detection
+    (be careful!)
+  </li>
+  <li>
+    Remove Getters and in template function calls. Use
+    <strong>pure pipes</strong>.
+  </li>
+  <li>
+    Do heavy lifiting up front, optimize the <strong>NgRx selectors</strong>
+  </li>
+  <li>Use <strong>trackBy</strong> to decrease the number of DOM mutations</li>
+  <li>
+    Use <strong>virtual scrolling</strong> for large lists. Currently this works
+    only if the list items have the same height.
+  </li>
+  <li>Replace expensive <strong>@Hostlisteners</strong></li>
+</ul>
